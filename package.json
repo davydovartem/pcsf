@@ -1,0 +1,32 @@
+{
+  "name": "pcf",
+  "displayName": "PCF file format for Bootfrost prover",
+  "description": "PCF file format for Bootfrost prover",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "pcf",
+      "aliases": ["BootfrostPCF", "pcf"],
+      "extensions": [".pcf"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "pcf",
+      "scopeName": "source.pcf",
+      "path": "./syntaxes/pcf.tmLanguage.json"
+    }],
+    "themes": [
+      {
+        "label": "PCF Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/pcf-color-theme.json"
+      }
+    ]
+  }
+}
