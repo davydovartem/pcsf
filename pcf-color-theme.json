@@ -16,61 +16,61 @@
         {
             "scope": "variable.parameter.pcf",
             "settings": {
-                "foreground": "#8080FF" 
+                "foreground": "#D19A66" // Оранжевый для переменных
             }
         },
         {
             "scope": "comment.line.pcf",
             "settings": {
-                "foreground": "#4A5D4A"
+                "foreground": "#5C6370" // Темно-серый для комментариев
             }
         },
         {
             "scope": "entity.name.atom.pcf",
             "settings": {
-                "foreground": "#FFA500" // Оранжевый для конъюнктов
+                "foreground": "#E06C75" // Красный для конъюнктов
             }
         },
         {
             "scope": "entity.name.function.pcf",
             "settings": {
-                "foreground": "#008000" // Зеленый для функций
+                "foreground": "#61AFEF" // Голубой для функций
             }
         },
         {
             "scope": "punctuation.separator.pcf",
             "settings": {
-                "foreground": "#A9A9A9" // Серый для разделителей
+                "foreground": "#ABB2BF" // Светло-серый для разделителей
             }
         },
         {
             "scope": "constant.numeric.pcf",
             "settings": {
-                "foreground": "#FF4500" // Оранжево-красный для чисел
+                "foreground": "#ffffff" // Белый для чисел
             }
         },
         {
             "scope": "string.quoted.double.pcf",
             "settings": {
-                "foreground": "#0000FF" // Ярко-синий для строк
+                "foreground": "#98C379" // Зеленый для строк
             }
         },
         {
             "scope": "keyword.operator.comparison.pcf",
             "settings": {
-                "foreground": "#8B008B" // Темно-фиолетовый для операторов сравнения
+                "foreground": "#C678DD" // Фиолетовый для операторов сравнения
             }
         },
         {
             "scope": "keyword.operator.arithmetic.pcf",
             "settings": {
-                "foreground": "#FF8C00" // Темно-оранжевый для арифметических операторов
+                "foreground": "#E06C75" // Красный для арифметических операторов
             }
         },
         {
             "scope": "keyword.control.directive.pcf",
             "settings": {
-                "foreground": "#4682B4" // Стальной синий для директив
+                "foreground": "#56B6C2" // Бирюзовый для директив
             }
         },
         {
