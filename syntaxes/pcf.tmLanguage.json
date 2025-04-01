@@ -1,79 +1,111 @@
 {
   "scopeName": "source.pcf",
   "patterns": [
-    {
-      "name": "keyword.control.a-quantifier.pcf",
-      "match": "[!]"
-    },
-    {
-      "name": "keyword.control.e-quantifier.pcf",
-      "match": "[?]"
-    },
-    {
-      "name": "entity.name.function.pcf",
-      "match": "\\b[a-zA-Z][A-Za-z0-9_]*\\b(?=\\()"
-    },
-    {
-      "name": "variable.parameter.pcf",
-      "match": "\\b[a-zA-Z][A-Za-z0-9_]*\\b(?!\\()"
-    },
-    {
-      "name": "punctuation.definition.parameters.pcf",
-      "match": "[(),]"
-    },
-    {
-      "name": "keyword.operator.comparison.pcf",
-      "match": ">=|<=|>|<|=|!="
-    },
-    {
-      "name": "keyword.operator.arithmetic.pcf",
-      "match": "[+\\-*/]"
-    },
-    {
-      "name": "keyword.control.directive.pcf",
-      "begin": "\\$",
-      "end": "$|\\n",
-      "patterns": [
-        {
-          "match": "\\s*([A-Z][A-Za-z0-9_]*\\b(?=\\())",
-          "captures": {
-            "1": {
-              "name": "entity.name.function.pcf"
-            }
-          }
-        },
-        {
-          "match": "[(),]",
-          "name": "punctuation.definition.parameters.pcf"
-        }
-      ]
-    },
-    {
+    { "include": "#comment" },
+    { "include": "#quantifier_expression" },
+    { "include": "#common" }
+  ],
+  "repository": {
+    "comment": {
       "name": "comment.line.pcf",
       "match": "#.*"
     },
-    {
-      "name": "keyword.character.continuation.pcf",
-      "match": "~"
-    },
-    {
-      "name": "support.other.list.pcf",
-      "begin": "\\[",
-      "end": "\\]",
+    
+    "quantifier_expression": {
+      "begin": "(!)|(\\?)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.a-quantifier.pcf" },
+        "2": { "name": "keyword.control.e-quantifier.pcf" }
+      },
+      "end": "(?=\\s*[!?])|$",
       "patterns": [
-        {
-          "include": "$self"
-        }
+        { "include": "#variable" },
+        { "include": "#predicate" },
+        { "include": "#comment" },
+        { "include": "#common" }
       ]
     },
-    {
-      "name": "string.quoted.double.pcf",
-      "match": "\"[^\"]*\""
+    
+    "variable": {
+      "match": "\\b([a-zA-Z][A-Za-z0-9_]*)\\b(?!\\()",
+      "captures": {
+        "1": { "name": "variable.parameter.pcf" }
+      }
     },
-    {
-      "name": "constant.numeric.pcf",
-      "match": "\\b\\d+\\b"
+    
+    "predicate": {
+      "begin": "\\b([a-zA-Z][A-Za-z0-9_]*)\\s*\\(",
+      "beginCaptures": {
+        "1": { "name": "entity.name.function.pcf" }
+      },
+      "end": "\\)",
+      "patterns": [
+        { "include": "#variable" },
+        { "include": "#predicate" },
+        { "include": "#common" }
+      ]
+    },
+    
+    "common": {
+      "patterns": [
+        {
+          "name": "entity.name.function.pcf",
+          "match": "\\b[a-zA-Z][A-Za-z0-9_]*\\b(?=\\()"
+        },
+        {
+          "name": "punctuation.definition.parameters.pcf",
+          "match": "[(),]"
+        },
+        {
+          "name": "keyword.operator.comparison.pcf",
+          "match": ">=|<=|>|<|=|!="
+        },
+        {
+          "name": "keyword.operator.arithmetic.pcf",
+          "match": "[+\\-*/]"
+        },
+        {
+          "name": "keyword.control.directive.pcf",
+          "begin": "\\$",
+          "end": "\\n",
+          "patterns": [
+            {
+              "match": "\\s*([A-Z][A-Za-z0-9_]*\\b(?=\\())",
+              "captures": {
+                "1": {
+                  "name": "entity.name.function.pcf"
+                }
+              }
+            },
+            {
+              "match": "[(),]",
+              "name": "punctuation.definition.parameters.pcf"
+            }
+          ]
+        },
+        {
+          "name": "keyword.character.continuation.pcf",
+          "match": "~"
+        },
+        {
+          "name": "support.other.list.pcf",
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.pcf",
+          "match": "\"[^\"]*\""
+        },
+        {
+          "name": "constant.numeric.pcf",
+          "match": "\\b\\d+\\b"
+        }
+      ]
     }
-  ],
-  "repository": {}
+  }
 }

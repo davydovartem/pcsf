@@ -25,7 +25,7 @@
       {
         "label": "PCF Theme",
         "uiTheme": "vs-dark",
-        "path": "./themes/pcf-color-theme.json"
+        "path": "./pcf-color-theme.json"
       }
     ]
   }
