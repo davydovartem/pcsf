@@ -1,6 +1,6 @@
 # PCF Syntax Highlighting Extension
 
-This is the README for your extension "PCF". This extension provides syntax highlighting for files formatted in the positively-constructed formulas (PCF) language, which can be utilized in the Bootfrost prover.
+This is the README for your extension "PCF". This extension provides syntax highlighting for files formatted in the positively-constructed formulas (PCF) language, which can be utilized in the Bootfrost prover ()
 
 ## Features
 
@@ -26,6 +26,6 @@ This extension contributes the following settings:
 
 ## Release Notes
 
-### 1.0.0
+### 0.1.0
 
 Initial release of the PCF syntax highlighting extension.
