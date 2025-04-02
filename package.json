@@ -7,8 +7,14 @@
     "vscode": "^1.97.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Automated theorem provers",
+    "First-order logics languages"
   ],
+  "activationEvents": [
+       "onLanguage:pcf",
+       "onCommand:workbench.action.selectTheme"
+     ],
   "contributes": {
     "languages": [{
       "id": "pcf",
@@ -27,6 +33,12 @@
         "uiTheme": "vs-dark",
         "path": "./pcf-color-theme.json"
       }
+    ],
+    "commands": [
+        {
+            "command": "workbench.preferredColorTheme",
+            "title": "PCF Theme"
+        }
     ]
   }
 }
