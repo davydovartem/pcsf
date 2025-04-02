@@ -1,6 +1,6 @@
 # PCF Syntax Highlighting Extension
 
-This is the README for your extension "PCF". This extension provides syntax highlighting for files formatted in the positively-constructed formulas (PCF) language, which can be utilized in the [Bootfrost](https://github.com/snigavik/bootfrost) PCF prover 
+This extension provides syntax highlighting for files formatted in the positively-constructed formulas (PCF) language, which can be utilized in the [Bootfrost](https://github.com/snigavik/bootfrost) PCF prover 
 
 ## Features
 
@@ -10,7 +10,7 @@ This is the README for your extension "PCF". This extension provides syntax high
 
 ## Requirements
 
-To use this extension, ensure you have Visual Studio Code installed. This extension is compatible with the latest versions of VS Code.
+This extension is compatible with 1.97.0 version of VS Code.
 
 ## Extension Settings
 
