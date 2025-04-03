@@ -104,6 +104,18 @@
         {
           "name": "constant.numeric.pcf",
           "match": "\\b\\d+\\b"
+        },
+        {
+          "name": "keyword.operator.in.pcf",
+          "match": "\\bin\\b"
+        },
+        {
+          "name": "keyword.operator.notin.pcf",
+          "match": "\\bnotin\\b"
+        },
+        {
+          "name": "keyword.operator.notin.pcf",
+          "match": "\\bsubseteq\\b"
         }
       ]
     }
