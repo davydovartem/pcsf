@@ -1,5 +1,5 @@
 {
-  "scopeName": "source.pcf",
+  "scopeName": "source.pcsf",
   "patterns": [
     { "include": "#comment" },
     { "include": "#quantifier_expression" },
@@ -7,15 +7,15 @@
   ],
   "repository": {
     "comment": {
-      "name": "comment.line.pcf",
+      "name": "comment.line.pcsf",
       "match": "#.*"
     },
     
     "quantifier_expression": {
       "begin": "(!)|(\\?)",
       "beginCaptures": {
-        "1": { "name": "keyword.control.a-quantifier.pcf" },
-        "2": { "name": "keyword.control.e-quantifier.pcf" }
+        "1": { "name": "keyword.control.a-quantifier.pcsf" },
+        "2": { "name": "keyword.control.e-quantifier.pcsf" }
       },
       "end": "(?=\\s*[!?])|$",
       "patterns": [
@@ -29,14 +29,14 @@
     "variable": {
       "match": "\\b([a-zA-Z][A-Za-z0-9_]*)\\b(?!\\()",
       "captures": {
-        "1": { "name": "variable.parameter.pcf" }
+        "1": { "name": "variable.parameter.pcsf" }
       }
     },
     
     "predicate": {
       "begin": "\\b([a-zA-Z][A-Za-z0-9_]*)\\s*\\(",
       "beginCaptures": {
-        "1": { "name": "entity.name.function.pcf" }
+        "1": { "name": "entity.name.function.pcsf" }
       },
       "end": "\\)",
       "patterns": [
@@ -49,23 +49,23 @@
     "common": {
       "patterns": [
         {
-          "name": "entity.name.function.pcf",
+          "name": "entity.name.function.pcsf",
           "match": "\\b[a-zA-Z][A-Za-z0-9_]*\\b(?=\\()"
         },
         {
-          "name": "punctuation.definition.parameters.pcf",
+          "name": "punctuation.definition.parameters.pcsf",
           "match": "[(),]"
         },
         {
-          "name": "keyword.operator.comparison.pcf",
+          "name": "keyword.operator.comparison.pcsf",
           "match": ">=|<=|>|<|=|!="
         },
         {
-          "name": "keyword.operator.arithmetic.pcf",
+          "name": "keyword.operator.arithmetic.pcsf",
           "match": "[+\\-*/]"
         },
         {
-          "name": "keyword.control.directive.pcf",
+          "name": "keyword.control.directive.pcsf",
           "begin": "\\$",
           "end": "\\n",
           "patterns": [
@@ -73,22 +73,22 @@
               "match": "\\s*([A-Z][A-Za-z0-9_]*\\b(?=\\())",
               "captures": {
                 "1": {
-                  "name": "entity.name.function.pcf"
+                  "name": "entity.name.function.pcsf"
                 }
               }
             },
             {
               "match": "[(),]",
-              "name": "punctuation.definition.parameters.pcf"
+              "name": "punctuation.definition.parameters.pcsf"
             }
           ]
         },
         {
-          "name": "keyword.character.continuation.pcf",
+          "name": "keyword.character.continuation.pcsf",
           "match": "~"
         },
         {
-          "name": "support.other.list.pcf",
+          "name": "support.other.list.pcsf",
           "begin": "\\[",
           "end": "\\]",
           "patterns": [
@@ -98,24 +98,16 @@
           ]
         },
         {
-          "name": "string.quoted.double.pcf",
+          "name": "string.quoted.double.pcsf",
           "match": "\"[^\"]*\""
         },
         {
-          "name": "constant.numeric.pcf",
+          "name": "constant.numeric.pcsf",
           "match": "\\b\\d+\\b"
         },
         {
-          "name": "keyword.operator.in.pcf",
-          "match": "\\bin\\b"
-        },
-        {
-          "name": "keyword.operator.notin.pcf",
-          "match": "\\bnotin\\b"
-        },
-        {
-          "name": "keyword.operator.notin.pcf",
-          "match": "\\bsubseteq\\b"
+          "name": "keyword.operator.sets.pcsf",
+          "match": "\\b(in|notin|subseteq)\\b"
         }
       ]
     }
