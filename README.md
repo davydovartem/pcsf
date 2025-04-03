@@ -6,13 +6,12 @@ This extension provides syntax highlighting for files formatted in the positivel
 
 - **Syntax Highlighting**: Enjoy enhanced readability with syntax highlighting for various elements of PCSF, including quantifiers, variables, functions, and comments.
 - **Customizable Colors**: Easily modify the color scheme to fit your preferences through the settings.
-- **Support for Lists and Predicates**: The extension recognizes lists of variables and predicates, making it easier to work with complex formulas.
 
 ## Installation
 
 You have three alternatives:
 
-1. You can install it through VS Code Extension Marketplace. Just open extensions bar of your VScode and start typing "PCSF syntax..." and you should not miss it.
+1. Install it through VS Code Extension Marketplace. Just open extensions bar of your VScode and start typing "PCSF syntax..." and you should not be missing it.
 
 2. Download installable VSIX package file from releases section on github. Then just double click it and follow intallation steps. Or, go to extensions bar of your VScode, there you may find "Views and more Actions" button (usually in top right corner), and choose "Install from VSIX..." option, choose downloaded file and it should be installed.
 

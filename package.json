@@ -32,18 +32,89 @@
         "path": "./syntaxes/pcsf.tmLanguage.json"
       }
     ],
-    "themes": [
-      {
-        "label": "PCSF Theme",
-        "uiTheme": "dark-modern",
-        "path": "./pcsf-color-theme.json"
+    "configurationDefaults": {
+      "editor.tokenColorCustomizations": {
+        "textMateRules": [
+          {
+            "scope": "keyword.control.a-quantifier.pcsf",
+            "settings": {
+              "foreground": "#0000FF"
+            }
+          },
+          {
+            "scope": "keyword.control.e-quantifier.pcsf",
+            "settings": {
+              "foreground": "#FF0000"
+            }
+          },
+          {
+            "scope": "variable.parameter.pcsf",
+            "settings": {
+              "foreground": "#D19A66"
+            }
+          },
+          {
+            "scope": "comment.line.pcsf",
+            "settings": {
+              "foreground": "#5C6370"
+            }
+          },
+          {
+            "scope": "entity.name.function.pcsf",
+            "settings": {
+              "foreground": "#61AFEF"
+            }
+          },
+          {
+            "scope": "punctuation.separator.pcsf",
+            "settings": {
+              "foreground": "#ABB2BF"
+            }
+          },
+          {
+            "scope": "constant.numeric.pcsf",
+            "settings": {
+              "foreground": "#ffffff"
+            }
+          },
+          {
+            "scope": "string.quoted.double.pcsf",
+            "settings": {
+              "foreground": "#98C379"
+            }
+          },
+          {
+            "scope": "keyword.operator.comparison.pcsf",
+            "settings": {
+              "foreground": "#C678DD"
+            }
+          },
+          {
+            "scope": "keyword.operator.arithmetic.pcsf",
+            "settings": {
+              "foreground": "#E06C75"
+            }
+          },
+          {
+            "scope": "keyword.control.directive.pcsf",
+            "settings": {
+              "foreground": "#56B6C2"
+            }
+          },
+          {
+            "scope": "keyword.character.continuation.pcsf",
+            "settings": {
+              "foreground": "#B22222"
+            }
+          },
+          {
+            "scope": "keyword.operator.sets.pcsf",
+            "settings": {
+              "foreground": "#56B6C2"
+            }
+          }
+        ]
       }
-    ],
-    "commands": [
-      {
-        "command": "workbench.preferredColorTheme",
-        "title": "PCSF Theme"
-      }
-    ]
+    }
   }
 }
