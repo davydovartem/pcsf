@@ -23,10 +23,10 @@ This extension is compatible with 1.97.0 version of VS Code.
 
 ## Known Issues
 
-- Comments may not be recognized in certain contexts.
+- Probably need to adjust the color palette, I'll be glad for suggestions.
 
 ## Release Notes
 
-### 0.1.0
+### 0.2.0
 
 Initial release of the PCSF syntax highlighting extension.

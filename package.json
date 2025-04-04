@@ -2,14 +2,16 @@
   "name": "pcsf",
   "displayName": "PCSF syntax highlighting for Bootfrost prover",
   "description": "Positively Constructed Standardized Formulas (PCSF) file syntax highlighting for Bootfrost prover",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.97.0"
   },
   "categories": [
     "Programming Languages",
     "Automated theorem provers",
-    "First-order logics languages"
+    "First-order logics languages",
+    "Color theme",
+    "Syntax highlighting"
   ],
   "contributes": {
     "languages": [
