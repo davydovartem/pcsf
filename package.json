@@ -2,9 +2,14 @@
   "name": "pcsf",
   "displayName": "PCSF syntax highlighting for Bootfrost prover",
   "description": "Positively Constructed Standardized Formulas (PCSF) file syntax highlighting for Bootfrost prover",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davydovartem/pcsf.git"
+  },
   "version": "0.2.0",
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.98.0"
   },
   "categories": [
     "Programming Languages",
@@ -13,6 +18,10 @@
     "Color theme",
     "Syntax highlighting"
   ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "tsc -p ./"
+  },
   "contributes": {
     "languages": [
       {
@@ -34,25 +43,45 @@
         "path": "./syntaxes/pcsf.tmLanguage.json"
       }
     ],
+    "configuration": {
+      "title": "PCSF Syntax Highlighting",
+      "properties": {
+        "pcsfSyntax.colors.aQuantifier": {
+          "type": "string",
+          "default": "#4545FF",
+          "description": "Цвет для квантора всеобщности (!)"
+        },
+        "pcsfSyntax.colors.eQuantifier": {
+          "type": "string",
+          "default": "#FF0000",
+          "description": "Цвет для квантора существования (?)"
+        },
+        "pcsfSyntax.colors.variable": {
+          "type": "string",
+          "default": "#D19A66",
+          "description": "Цвет для переменных"
+        }
+      }
+    },
     "configurationDefaults": {
       "editor.tokenColorCustomizations": {
         "textMateRules": [
           {
             "scope": "keyword.control.a-quantifier.pcsf",
             "settings": {
-              "foreground": "#0000FF"
+              "foreground": "#4545FF"
             }
           },
           {
             "scope": "keyword.control.e-quantifier.pcsf",
             "settings": {
-              "foreground": "#FF0000"
+              "foreground": "${pcsfSyntax.colors.eQuantifier}"
             }
           },
           {
             "scope": "variable.parameter.pcsf",
             "settings": {
-              "foreground": "#D19A66"
+              "foreground": "${config:pcsfSyntax.colors.variable}"
             }
           },
           {
@@ -118,5 +147,9 @@
         ]
       }
     }
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.98.0",
+    "vscode": "^1.1.37"
   }
 }

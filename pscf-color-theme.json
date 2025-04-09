@@ -4,7 +4,7 @@
         {
             "scope": "keyword.control.a-quantifier.pcsf",
             "settings": {
-                "foreground": "#0000FF"
+                "foreground": "#3030ff"
             }
         },
         {
