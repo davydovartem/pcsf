@@ -13,10 +13,8 @@
   },
   "categories": [
     "Programming Languages",
-    "Automated theorem provers",
     "First-order logics languages",
-    "Color theme",
-    "Syntax highlighting"
+    "Themes"
   ],
   "main": "./out/extension.js",
   "scripts": {
@@ -60,6 +58,56 @@
           "type": "string",
           "default": "#D19A66",
           "description": "Цвет для переменных"
+        },
+        "pcsfSyntax.colors.comment": {
+          "type": "string",
+          "default": "#5C6370",
+          "description": "Цвет для комментариев"
+        },
+        "pcsfSyntax.colors.function": {
+          "type": "string",
+          "default": "#61AFEF",
+          "description": "Цвет для имен предикатов (и функциональных символов)"
+        },
+        "pcsfSyntax.colors.punctuation": {
+          "type": "string",
+          "default": "#ABB2BF",
+          "description": "Цвет для пунктуации (скобки, запятые)"
+        },
+        "pcsfSyntax.colors.number": {
+          "type": "string",
+          "default": "#ffffff",
+          "description": "Цвет для чисел"
+        },
+        "pcsfSyntax.colors.string": {
+          "type": "string",
+          "default": "#98C379",
+          "description": "Цвет для строк в кавычках"
+        },
+        "pcsfSyntax.colors.comparisonOperator": {
+          "type": "string",
+          "default": "#C678DD",
+          "description": "Цвет для операторов сравнения (>, <, =)"
+        },
+        "pcsfSyntax.colors.arithmeticOperator": {
+          "type": "string",
+          "default": "#E06C75",
+          "description": "Цвет для арифметических операторов (+, -, *, /)"
+        },
+        "pcsfSyntax.colors.directive": {
+          "type": "string",
+          "default": "#56B6C2",
+          "description": "Цвет для директив управления выводом ($)"
+        },
+        "pcsfSyntax.colors.continuation": {
+          "type": "string",
+          "default": "#B22222",
+          "description": "Цвет для символа продолжения строки (~)"
+        },
+        "pcsfSyntax.colors.setOperator": {
+          "type": "string",
+          "default": "#56B6C2",
+          "description": "Цвет для операций с множествами (in, notin)"
         }
       }
     },
@@ -75,13 +123,13 @@
           {
             "scope": "keyword.control.e-quantifier.pcsf",
             "settings": {
-              "foreground": "${pcsfSyntax.colors.eQuantifier}"
+              "foreground": "#FF0000"
             }
           },
           {
             "scope": "variable.parameter.pcsf",
             "settings": {
-              "foreground": "${config:pcsfSyntax.colors.variable}"
+              "foreground": "#D19A66"
             }
           },
           {

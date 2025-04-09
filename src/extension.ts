@@ -1,14 +1,9 @@
 import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
     console.log('Расширение PCSF активировано!');
-    const editorConfigView = vscode.workspace.getConfiguration('editor');
-    console.log(editorConfigView.get('tokenColorCustomizations.textMateRules'));
-    
 
-    // Обновляем цвета при старте
     updateTokenColors();
 
-    // И при изменении настроек
     context.subscriptions.push(
         vscode.workspace.onDidChangeConfiguration((e) => {
             if (e.affectsConfiguration('pcsfSyntax.colors')) {
@@ -33,6 +28,72 @@ async function updateTokenColors() {
             "scope": "keyword.control.e-quantifier.pcsf",
             "settings": {
                 "foreground": config.get('colors.eQuantifier', '#FF0000')
+            }
+        },
+        {
+            "scope": "variable.parameter.pcsf",
+            "settings": {
+                "foreground": config.get('colors.variable', '#D19A66')
+            }
+        },
+        {
+            "scope": "comment.line.pcsf",
+            "settings": {
+                "foreground": config.get('colors.comment', '#5C6370')
+            }
+        },
+        {
+            "scope": "entity.name.function.pcsf",
+            "settings": {
+                "foreground": config.get('colors.function', '#61AFEF')
+            }
+        },
+        {
+            "scope": "punctuation.separator.pcsf",
+            "settings": {
+                "foreground": config.get('colors.punctuation', '#ABB2BF')
+            }
+        },
+        {
+            "scope": "constant.numeric.pcsf",
+            "settings": {
+                "foreground": config.get('colors.constant', '#ffffff')
+            }
+        },
+        {
+            "scope": "string.quoted.double.pcsf",
+            "settings": {
+                "foreground": config.get('colors.string', '#98C379')
+            }
+        },
+        {
+            "scope": "keyword.operator.comparison.pcsf",
+            "settings": {
+                "foreground": config.get('colors.comparison', '#C678DD')
+            }
+        },
+        {
+            "scope": "keyword.operator.arithmetic.pcsf",
+            "settings": {
+                "foreground": config.get('colors.arithmetic', '#E06C75')
+            }
+        },
+        {
+            "scope": "keyword.control.directive.pcsf",
+            "settings": {
+                "foreground": config.get('colors.directive', '#56B6C2')
+            }
+        },
+        {
+            "scope": "keyword.character.continuation.pcsf",
+            "settings": {
+                "foreground": config.get('colors.continuation', '#B22222')
+            }
+        },
+        {
+            "scope": "keyword.operator.sets.pcsf",
+            "settings": {
+                "foreground": config.get('colors.sets', '#56B6C2')
             }
         }
     ];
