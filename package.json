@@ -3,6 +3,11 @@
   "displayName": "PCSF syntax highlighting for Bootfrost prover",
   "description": "Positively Constructed Standardized Formulas (PCSF) file syntax highlighting for Bootfrost prover",
   "license": "MIT",
+  "publisher": "davydovartem",
+  "author": {
+    "name": "Artem Davydov",
+    "email": "ethrik@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/davydovartem/pcsf.git"
@@ -13,7 +18,6 @@
   },
   "categories": [
     "Programming Languages",
-    "First-order logics languages",
     "Themes"
   ],
   "main": "./out/extension.js",
