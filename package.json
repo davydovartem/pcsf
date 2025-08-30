@@ -12,28 +12,40 @@
     "type": "git",
     "url": "https://github.com/davydovartem/pcsf.git"
   },
-  "version": "0.2.0",
+  "version": "0.3.0",
   "engines": {
-    "vscode": "^1.98.0"
+    "vscode": "^1.97.0"
   },
   "categories": [
-    "Programming Languages",
-    "Themes"
+    "Programming Languages"
+  ],
+  "keywords": [
+    "pcsf",
+    "bootfrost",
+    "prover",
+    "syntax",
+    "highlighting"
+  ],
+  "activationEvents": [
+    "onLanguage:pcsf"
   ],
   "main": "./out/extension.js",
   "scripts": {
-    "compile": "tsc -p ./"
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
   },
   "contributes": {
     "languages": [
       {
         "id": "pcsf",
         "aliases": [
-          "BootfrostPCSF",
+          "PCSF",
           "pcsf"
         ],
         "extensions": [
-          ".pcsf"
+          ".pcsf",
+          ".pcf"
         ],
         "configuration": "./language-configuration.json"
       }
@@ -45,18 +57,66 @@
         "path": "./syntaxes/pcsf.tmLanguage.json"
       }
     ],
+    "commands": [
+      {
+        "command": "pcsfSyntax.runBootfrost",
+        "title": "Run Bootfrost",
+        "category": "PCSF"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "pcsfSyntax.runBootfrost",
+          "when": "editorLangId == pcsf",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "pcsfSyntax.runBootfrost",
+          "when": "editorLangId == pcsf"
+        }
+      ]
+    },
     "configuration": {
-      "title": "PCSF Syntax Highlighting",
+      "title": "PCSF Syntax",
       "properties": {
+        "pcsfSyntax.bootfrost.executablePath": {
+          "type": "string",
+          "default": "bootfrost",
+          "description": "Путь к исполняемому файлу Bootfrost"
+        },
+        "pcsfSyntax.bootfrost.defaultStrategy": {
+          "type": "string",
+          "enum": [
+            "plain",
+            "general",
+            "manualfirst",
+            "manualbest"
+          ],
+          "default": "general",
+          "description": "Стратегия по умолчанию для Bootfrost"
+        },
+        "pcsfSyntax.bootfrost.defaultLimit": {
+          "type": "number",
+          "default": 1000,
+          "description": "Лимит шагов по умолчанию"
+        },
+        "pcsfSyntax.bootfrost.defaultOutputFile": {
+          "type": "string",
+          "default": "",
+          "description": "Файл для сохранения вывода по умолчанию"
+        },
         "pcsfSyntax.colors.aQuantifier": {
           "type": "string",
           "default": "#4545FF",
-          "description": "Цвет для квантора всеобщности (!)"
+          "description": "Цвет для квантора ∀"
         },
         "pcsfSyntax.colors.eQuantifier": {
           "type": "string",
           "default": "#FF0000",
-          "description": "Цвет для квантора существования (?)"
+          "description": "Цвет для квантора ∃"
         },
         "pcsfSyntax.colors.variable": {
           "type": "string",
@@ -71,137 +131,100 @@
         "pcsfSyntax.colors.function": {
           "type": "string",
           "default": "#61AFEF",
-          "description": "Цвет для имен предикатов (и функциональных символов)"
+          "description": "Цвет для функций"
         },
         "pcsfSyntax.colors.punctuation": {
           "type": "string",
           "default": "#ABB2BF",
-          "description": "Цвет для пунктуации (скобки, запятые)"
+          "description": "Цвет для пунктуации"
         },
-        "pcsfSyntax.colors.number": {
+        "pcsfSyntax.colors.constant": {
           "type": "string",
           "default": "#ffffff",
-          "description": "Цвет для чисел"
+          "description": "Цвет для констант"
         },
         "pcsfSyntax.colors.string": {
           "type": "string",
           "default": "#98C379",
-          "description": "Цвет для строк в кавычках"
+          "description": "Цвет для строк"
         },
-        "pcsfSyntax.colors.comparisonOperator": {
+        "pcsfSyntax.colors.comparison": {
           "type": "string",
           "default": "#C678DD",
-          "description": "Цвет для операторов сравнения (>, <, =)"
+          "description": "Цвет для операторов сравнения"
         },
-        "pcsfSyntax.colors.arithmeticOperator": {
+        "pcsfSyntax.colors.arithmetic": {
           "type": "string",
           "default": "#E06C75",
-          "description": "Цвет для арифметических операторов (+, -, *, /)"
+          "description": "Цвет для арифметических операторов"
         },
         "pcsfSyntax.colors.directive": {
           "type": "string",
           "default": "#56B6C2",
-          "description": "Цвет для директив управления выводом ($)"
+          "description": "Цвет для директив"
         },
         "pcsfSyntax.colors.continuation": {
           "type": "string",
           "default": "#B22222",
-          "description": "Цвет для символа продолжения строки (~)"
+          "description": "Цвет для продолжения строки"
         },
-        "pcsfSyntax.colors.setOperator": {
+        "pcsfSyntax.colors.sets": {
           "type": "string",
           "default": "#56B6C2",
-          "description": "Цвет для операций с множествами (in, notin)"
+          "description": "Цвет для операторов множеств"
         }
       }
     },
-    "configurationDefaults": {
-      "editor.tokenColorCustomizations": {
-        "textMateRules": [
-          {
-            "scope": "keyword.control.a-quantifier.pcsf",
-            "settings": {
-              "foreground": "#4545FF"
-            }
-          },
-          {
-            "scope": "keyword.control.e-quantifier.pcsf",
-            "settings": {
-              "foreground": "#FF0000"
-            }
-          },
-          {
-            "scope": "variable.parameter.pcsf",
-            "settings": {
-              "foreground": "#D19A66"
-            }
-          },
-          {
-            "scope": "comment.line.pcsf",
-            "settings": {
-              "foreground": "#5C6370"
-            }
-          },
-          {
-            "scope": "entity.name.function.pcsf",
-            "settings": {
-              "foreground": "#61AFEF"
-            }
-          },
-          {
-            "scope": "punctuation.separator.pcsf",
-            "settings": {
-              "foreground": "#ABB2BF"
-            }
-          },
-          {
-            "scope": "constant.numeric.pcsf",
-            "settings": {
-              "foreground": "#ffffff"
-            }
-          },
-          {
-            "scope": "string.quoted.double.pcsf",
-            "settings": {
-              "foreground": "#98C379"
-            }
-          },
-          {
-            "scope": "keyword.operator.comparison.pcsf",
-            "settings": {
-              "foreground": "#C678DD"
-            }
-          },
-          {
-            "scope": "keyword.operator.arithmetic.pcsf",
-            "settings": {
-              "foreground": "#E06C75"
-            }
-          },
-          {
-            "scope": "keyword.control.directive.pcsf",
-            "settings": {
-              "foreground": "#56B6C2"
-            }
-          },
-          {
-            "scope": "keyword.character.continuation.pcsf",
-            "settings": {
-              "foreground": "#B22222"
-            }
-          },
-          {
-            "scope": "keyword.operator.sets.pcsf",
-            "settings": {
-              "foreground": "#56B6C2"
+    "debuggers": [
+      {
+        "type": "bootfrost",
+        "label": "Bootfrost PCSF Prover",
+        "configurationAttributes": {
+          "launch": {
+            "required": ["program"],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Путь к PCSF файлу",
+                "default": "${file}"
+              },
+              "strategy": {
+                "type": "string",
+                "enum": ["plain", "general", "manualfirst", "manualbest"],
+                "description": "Стратегия доказательства",
+                "default": "general"
+              },
+              "limit": {
+                "type": "number",
+                "description": "Максимальное количество шагов",
+                "default": 1000
+              },
+              "json": {
+                "type": "boolean",
+                "description": "Включить JSON вывод",
+                "default": false
+              },
+              "outputFile": {
+                "type": "string",
+                "description": "Файл для сохранения вывода",
+                "default": ""
+              }
             }
           }
+        },
+        "initialConfigurations": [
+            {
+                "type": "bootfrost",
+                "request": "launch",
+                "name": "Launch Bootfrost",
+                "program": "${file}",
+                "strategy": "general",
+                "limit": 1000,
+                "json": false,
+                "outputFile": ""
+            }
         ]
       }
-    }
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.98.0",
-    "vscode": "^1.1.37"
+    ]
   }
 }

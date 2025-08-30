@@ -43,102 +43,67 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = activate;
+exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
+const debugAdapter_1 = require("./debugAdapter");
 function activate(context) {
-    console.log('Расширение PCSF активировано!');
-    updateTokenColors();
-    context.subscriptions.push(vscode.workspace.onDidChangeConfiguration((e) => {
-        if (e.affectsConfiguration('pcsfSyntax.colors')) {
-            updateTokenColors();
+    console.log('PCSF Syntax Highlighting Extension активировано');
+    // Активируем отладку
+    (0, debugAdapter_1.activateDebugAdapter)(context);
+    // Команда для запуска Bootfrost на активном файле
+    const runBootfrostCommand = vscode.commands.registerCommand('pcsfSyntax.runBootfrost', () => __awaiter(this, void 0, void 0, function* () {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor || editor.document.languageId !== 'pcsf') {
+            vscode.window.showErrorMessage('Активный файл не является PCSF файлом');
+            return;
         }
-    }));
-}
-function updateTokenColors() {
-    return __awaiter(this, void 0, void 0, function* () {
         const config = vscode.workspace.getConfiguration('pcsfSyntax');
-        const editorConfig = vscode.workspace.getConfiguration('editor');
-        const newRules = [
-            {
-                "scope": "keyword.control.a-quantifier.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.aQuantifier', '#4545FF')
-                }
-            },
-            {
-                "scope": "keyword.control.e-quantifier.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.eQuantifier', '#FF0000')
-                }
-            },
-            {
-                "scope": "variable.parameter.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.variable', '#D19A66')
-                }
-            },
-            {
-                "scope": "comment.line.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.comment', '#5C6370')
-                }
-            },
-            {
-                "scope": "entity.name.function.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.function', '#61AFEF')
-                }
-            },
-            {
-                "scope": "punctuation.separator.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.punctuation', '#ABB2BF')
-                }
-            },
-            {
-                "scope": "constant.numeric.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.constant', '#ffffff')
-                }
-            },
-            {
-                "scope": "string.quoted.double.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.string', '#98C379')
-                }
-            },
-            {
-                "scope": "keyword.operator.comparison.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.comparison', '#C678DD')
-                }
-            },
-            {
-                "scope": "keyword.operator.arithmetic.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.arithmetic', '#E06C75')
-                }
-            },
-            {
-                "scope": "keyword.control.directive.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.directive', '#56B6C2')
-                }
-            },
-            {
-                "scope": "keyword.character.continuation.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.continuation', '#B22222')
-                }
-            },
-            {
-                "scope": "keyword.operator.sets.pcsf",
-                "settings": {
-                    "foreground": config.get('colors.sets', '#56B6C2')
-                }
+        let executablePath = config.get('bootfrost.executablePath', 'bootfrost');
+        // Проверяем существование файла
+        const fs = require('fs');
+        if (!fs.existsSync(executablePath)) {
+            const selectedPath = yield promptForBootfrostPath();
+            if (!selectedPath) {
+                return;
             }
-        ];
-        const currentConfig = editorConfig.get('tokenColorCustomizations') || {};
-        currentConfig.textMateRules = newRules;
-        yield editorConfig.update('tokenColorCustomizations', currentConfig, vscode.ConfigurationTarget.Global);
+            yield config.update('bootfrost.executablePath', selectedPath, true);
+            executablePath = selectedPath;
+        }
+        const strategy = config.get('bootfrost.defaultStrategy', 'general');
+        const limit = config.get('bootfrost.defaultLimit', 1000);
+        // Ищем существующий терминал с именем 'Bootfrost'
+        let terminal = vscode.window.terminals.find(t => t.name === 'Bootfrost');
+        // Если терминал не найден, создаем новый
+        if (!terminal) {
+            terminal = vscode.window.createTerminal('Bootfrost');
+        }
+        terminal.show();
+        // Правильно экранируем путь к файлу для PowerShell
+        const filePath = editor.document.uri.fsPath.replace(/\\/g, '\\\\');
+        const executable = executablePath.replace(/\\/g, '\\\\');
+        // Формируем команду с учетом синтаксиса PowerShell
+        const command = `& '${executable}' -f '${filePath}' -s ${strategy} -l ${limit}`;
+        terminal.sendText(command);
+    }));
+    context.subscriptions.push(runBootfrostCommand);
+}
+function promptForBootfrostPath() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const options = {
+            canSelectFiles: true,
+            canSelectFolders: false,
+            canSelectMany: false,
+            title: 'Выберите исполняемый файл Bootfrost',
+            filters: {
+                'Исполняемые файлы': ['exe', 'cmd', 'bat'],
+                'Все файлы': ['*']
+            }
+        };
+        const fileUri = yield vscode.window.showOpenDialog(options);
+        if (fileUri && fileUri[0]) {
+            return fileUri[0].fsPath;
+        }
+        return undefined;
     });
 }
+function deactivate() { }

@@ -12,6 +12,14 @@
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			]
+		},
+		{
+			"type": "bootfrost",
+			"request": "launch",
+			"name": "Запустить Bootfrost",
+			"program": "${file}",
+			"strategy": "general",
+			"limit": 1000
 		}
 	]
 }
